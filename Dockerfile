@@ -47,9 +47,12 @@ RUN rbenv rehash
 
 # INSTALL SN1P3R
 RUN git clone https://github.com/1N3/Sn1per.git
-RUN cd ~/Sn1per && \
-	chmod +x install.sh && \
-	./install.sh
+
+# Slightly modified install.sh script
+COPY ./install.sh /root/Sn1per/install.sh
+
+# Run the installer
+RUN cd ~/Sn1per && chmod +x install.sh && ./install.sh
 
 
 # Always start container into a bash shell
