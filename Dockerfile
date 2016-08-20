@@ -45,6 +45,14 @@ RUN gem install bundler
 
 RUN rbenv rehash
 
+
+# Install Sn1per dependencies
+RUN apt-get install -y dos2unix zenmap sslyze joomscan uniscan xprobe2 cutycapt unicornscan waffit host whois arachni theharvester dnsenum dirb dnsrecon curl nmap php5.6 php5.6-curl wapiti hydra iceweasel wpscan sqlmap arachni w3af golismero nbtscan enum4linux cisco-torch metasploit-framework theharvester dnsenum nikto smtp-user-enum whatweb python nbtscan sslscan amap
+RUN pip install dnspython colorama tldextract urllib3 ipaddress
+RUN gem install rake
+RUN gem install ruby-nmap net-http-persistent mechanize text-table
+
+
 # INSTALL SN1P3R
 RUN git clone https://github.com/1N3/Sn1per.git
 
