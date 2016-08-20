@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER: menzo@menzo.io
+MAINTAINER menzo@menzo.io
 
 
 # Tap into the kali repository 2016.1
