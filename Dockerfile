@@ -12,7 +12,7 @@ RUN add-apt-repository ppa:ondrej/php
 
 RUN apt-get update
 
-	# Install some base requirements for the image
+# Install some base requirements for the image
 RUN apt-get install -y php5.6 php5.6-curl git git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
 
 # Install python 2.7
@@ -46,7 +46,6 @@ RUN gem install bundler
 
 RUN rbenv rehash
 
-RUN rm /etc/apt/sources.list.d/kali.sources.list
 RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" > /etc/apt/sources.list.d/kali.sources.list
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6
 RUN gpg -a --export ED444FF07D8D0BF6 | apt-key add -
