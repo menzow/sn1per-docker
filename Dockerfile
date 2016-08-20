@@ -1,11 +1,15 @@
 FROM ubuntu:16.04
 MAINTAINER menzo@menzo.io
 
+RUN apt-get update
+
 
 # Tap into the kali repository 2016.1
 RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" > /etc/apt/sources.list.d/kali.sources.list
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6
 RUN gpg -a --export ED444FF07D8D0BF6 | apt-key add -
+
+RUN apt-get install -y software-properties-common
 
 # PHP 5.6
 RUN add-apt-repository ppa:ondrej/php
@@ -13,8 +17,7 @@ RUN add-apt-repository ppa:ondrej/php
 RUN apt-get update
 
 # Install some base requirements for the image
-RUN apt-get install -y software-properties-common php5.6 php5.6-curl git git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
-
+RUN apt-get install -y php5.6 php5.6-curl git git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
 
 # Install python 2.7
 RUN apt-get install python2.7
