@@ -1,4 +1,4 @@
-FROM kalilinux/kali-linux-docker
+FROM ubuntu:16.04
 MAINTAINER menzo@menzo.io
 
 RUN apt-get update
@@ -52,6 +52,8 @@ RUN gpg -a --export ED444FF07D8D0BF6 | apt-key add -
 
 RUN apt-get update
 
+# Install Sn1per dependencies
+RUN apt-get install -y dos2unix zenmap sslyze joomscan uniscan xprobe2 cutycapt unicornscan waffit host whois arachni theharvester dnsenum dirb dnsrecon curl nmap php5.6 php5.6-curl wapiti hydra iceweasel wpscan sqlmap arachni w3af golismero nbtscan enum4linux cisco-torch metasploit-framework theharvester dnsenum nikto smtp-user-enum whatweb python nbtscan sslscan amap
 RUN pip install dnspython colorama tldextract urllib3 ipaddress
 RUN gem install rake
 RUN gem install ruby-nmap net-http-persistent mechanize text-table
@@ -67,6 +69,8 @@ COPY ./install.sh /root/Sn1per/install.sh
 
 # Run the installer
 RUN cd ~/Sn1per && chmod +x install.sh && ./install.sh
+
+RUN apt-get install -y iputils-ping
 
 # Clean up after installation
 RUN apt-get clean
