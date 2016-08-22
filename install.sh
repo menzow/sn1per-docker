@@ -25,14 +25,6 @@ mkdir -p $INSTALL_DIR 2> /dev/null
 cp -Rf $PWD/* $INSTALL_DIR 
 cd $INSTALL_DIR
 
-echo -e "$OKORANGE + -- --=[Installing package dependencies...$RESET"
-apt-get install dos2unix zenmap sslyze joomscan uniscan xprobe2 cutycapt unicornscan waffit host whois arachni theharvester dnsenum dirb dnsrecon curl nmap php5.6 php5.6-curl wapiti hydra iceweasel wpscan sqlmap arachni w3af golismero nbtscan enum4linux cisco-torch metasploit-framework theharvester dnsenum nikto smtp-user-enum whatweb python nbtscan sslscan amap
-pip install dnspython colorama tldextract urllib3 ipaddress
-
-echo -e "$OKORANGE + -- --=[Installing gem dependencies...$RESET"
-gem install rake
-gem install ruby-nmap net-http-persistent mechanize text-table
-
 echo -e "$OKORANGE + -- --=[Cleaning up old extensions...$RESET"
 rm -Rf Findsploit/ Brutex/ Goohak/ XSSTracer/ MassBleed/ SuperMicro-Password-Scanner/ CMSmap/ yasuo/ Sublist3r/ shocker/ jexboss/ CrackMapExec/ serializekiller/
 
@@ -65,7 +57,7 @@ chmod +x $INSTALL_DIR/MassBleed/heartbleed.py
 chmod +x $INSTALL_DIR/MassBleed/openssl_ccs.pl
 chmod +x $INSTALL_DIR/MassBleed/winshock.sh 
 chmod +x $INSTALL_DIR/SuperMicro-Password-Scanner/supermicro_scan.sh
-chmod +x $INSTALL_DIR/testssl.sh/testssl.sh
+chmod +x $INSTALL_DIR/testssl.sh
 rm -f /usr/bin/sniper
 rm -f /usr/bin/goohak
 rm -f /usr/bin/xsstracer
