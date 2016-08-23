@@ -21,7 +21,8 @@ echo ""
 # DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 INSTALL_DIR=/usr/share/sniper
 
-mkdir -p $INSTALL_DIR 2> /dev/null
+mkdir -p $INSTALL_DIR
+
 cp -Rf $PWD/* $INSTALL_DIR 
 cd $INSTALL_DIR
 
