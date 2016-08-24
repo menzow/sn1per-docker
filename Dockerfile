@@ -87,7 +87,7 @@ RUN mv /usr/bin/python /usr/bin/python.unknown && \
 	rbenv rehash && \
 	gem install  \
 		mechanize \
-		bcrypt --version 3.1.11 \
+		bcrypt \
 		net-http-persistent \
 		rake \
 		ruby-nmap \
