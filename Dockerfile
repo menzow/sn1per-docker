@@ -106,8 +106,11 @@ RUN gem install  \
 	ruby-nmap \
 	text-table
 
+
+
 # INSTALL SN1P3R
-RUN git clone https://github.com/1N3/Sn1per.git
+RUN cd /root
+	git clone https://github.com/1N3/Sn1per.git
 
 # Slightly modified install.sh script
 COPY ./install.sh /root/Sn1per/install.sh
