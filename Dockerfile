@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM busybox
 MAINTAINER menzo@menzo.io
 
 
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
 	dirb \
 	dnsenum \
 	dnsrecon \
+	dnsutils \
 	dos2unix \
 	enum4linux \
 	git \
@@ -67,56 +68,44 @@ RUN apt-get update && apt-get install -y \
 	zlib1g-dev \
 	&& apt-get clean
 
-# Set python 2.7 to default
+
+ENV PATH /root/.rbenv/versions/2.3.1/bin:/root/.rbenv/plugins/ruby-build/bin:/root/.rbenv/bin:$PATH
+
+COPY ./install.sh /root
+
+# Install python and ruby + dependencies
 RUN mv /usr/bin/python /usr/bin/python.unknown && \
-	ln -s /usr/bin/python2.7 /usr/bin/python
-
-# Install PIP
-RUN curl https://bootstrap.pypa.io/get-pip.py | python
-
-# INSTALL RUBY
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
+	ln -s /usr/bin/python2.7 /usr/bin/python && \
+	curl https://bootstrap.pypa.io/get-pip.py | python && \
+	git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
 	git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-
-ENV PATH /root/.rbenv/plugins/ruby-build/bin:/root/.rbenv/bin:$PATH
-
-RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-RUN eval "$(rbenv init -)"
-
-RUN rbenv install 2.3.1 && \
+	echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+	eval "$(rbenv init -)"
+	rbenv install 2.3.1 && \
 	rbenv global 2.3.1
-
-ENV PATH /root/.rbenv/versions/2.3.1/bin:$PATH
-
-RUN	gem install bundler && \
-	rbenv rehash
-
-# Install Sn1per dependencies
-RUN pip install  \
-	colorama \
-	dnspython \
-	ipaddress \
-	tldextract \
-	urllib3
-
-RUN gem install  \
-	mechanize \
-	net-http-persistent \
-	rake \
-	ruby-nmap \
-	text-table
-
-
+	gem install bundler && \
+	rbenv rehash && \
+	gem install  \
+		mechanize \
+		bcrypt --version 3.1.11 \
+		net-http-persistent \
+		rake \
+		ruby-nmap \
+		text-table && \
+	pip install  \
+		colorama \
+		dnspython \
+		ipaddress \
+		tldextract \
+		urllib3
 
 # INSTALL SN1P3R
-RUN cd /root
-	git clone https://github.com/1N3/Sn1per.git
-
-# Slightly modified install.sh script
-COPY ./install.sh /root/Sn1per/install.sh
-
-# Run the installer
-RUN cd ~/Sn1per && \
+RUN cd /root && \
+	git clone https://github.com/1N3/Sn1per.git && \
+	rm ~/Sn1per/install.sh
+	cd ~/Sn1per && \
+	rm ./install.sh && \
+	mv ~/install.sh ./install.sh; sync && \
 	chmod +x install.sh && \
 	./install.sh
 
