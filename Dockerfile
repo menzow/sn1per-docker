@@ -1,4 +1,4 @@
-FROM busybox
+FROM ubuntu:16.04
 MAINTAINER menzo@menzo.io
 
 
