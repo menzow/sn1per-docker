@@ -48,6 +48,8 @@ RUN apt-get update && apt-get install -y \
 	python \
 	python-software-properties \
 	python2.7 \
+	rubygems \
+	ruby-bcrypt \
 	smtp-user-enum \
 	software-properties-common \
 	sqlite3 \
@@ -77,14 +79,6 @@ COPY ./install.sh /root
 RUN mv /usr/bin/python /usr/bin/python.unknown && \
 	ln -s /usr/bin/python2.7 /usr/bin/python && \
 	curl https://bootstrap.pypa.io/get-pip.py | python && \
-	git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
-	git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build && \
-	echo 'eval "$(rbenv init -)"' >> ~/.bashrc  && \
-	eval "$(rbenv init -)"  && \
-	rbenv install 2.3.1 && \
-	rbenv global 2.3.1  && \
-	gem install bundler && \
-	rbenv rehash && \
 	gem install  \
 		mechanize \
 		bcrypt \
