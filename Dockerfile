@@ -71,8 +71,6 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get clean
 
 
-ENV PATH /root/.rbenv/versions/2.3.1/bin:/root/.rbenv/plugins/ruby-build/bin:/root/.rbenv/bin:$PATH
-
 COPY ./install.sh /root
 
 # Install python and ruby + dependencies
