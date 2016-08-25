@@ -102,7 +102,7 @@ RUN mv /usr/bin/python /usr/bin/python.unknown && \
 # INSTALL SN1P3R
 RUN cd /root && \
 	git clone https://github.com/1N3/Sn1per.git && \
-	rm ~/Sn1per/install.sh
+	rm ~/Sn1per/install.sh && \
 	cd ~/Sn1per && \
 	rm ./install.sh && \
 	mv ~/install.sh ./install.sh; sync && \
