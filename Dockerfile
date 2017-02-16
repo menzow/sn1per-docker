@@ -1,80 +1,53 @@
 FROM ubuntu:16.04
 MAINTAINER menzo@menzo.io
 
-
-RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" >> /etc/apt/sources.list.d/kali.sources.list
-RUN gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6
-RUN gpg -a --export ED444FF07D8D0BF6 | apt-key add -
-
-
 ENV LC_ALL C.UTF-8
+ENV INSTALL_DIR /usr/share/sniper
+ENV LOOT_DIR /usr/share/sniper/loot
+ENV PLUGINS_DIR /usr/share/sniper/plugins
 
+RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" >> /etc/apt/sources.list.d/kali.sources.list && \
+	gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6 && \
+	gpg -a --export ED444FF07D8D0BF6 | apt-key add -
 RUN apt-get update && apt-get install -y \
-	amap \
-	arachni \
-	bsdmainutils \
-	build-essential \
-	cisco-torch \
-	curl \
-	cutycapt \
-	dirb \
-	dnsenum \
-	dnsrecon \
-	dnsutils \
+	ruby \
+	rubygems \
+	python \
 	dos2unix \
-	enum4linux \
-	git \
-	git-core \
-	golismero \
+	zenmap \
+	sslyze \
+	uniscan \
+	xprobe2 \
+	cutycapt \
+	unicornscan \
+	waffit \
 	host \
-	hydra \
-	iceweasel \
-	iputils-ping \
-	joomscan \
-	libcurl4-openssl-dev \
-	libffi-dev \
-	libreadline-dev \
-	libsqlite3-dev \
-	libssl-dev \
-	libxml2-dev \
-	libxslt1-dev \
-	libyaml-dev \
-	metasploit-framework \
-	nbtscan \
-	nikto \
+	whois \
+	dirb \
+	dnsrecon \
+	curl \
 	nmap \
 	php \
 	php-curl \
-	python \
-	python-software-properties \
-	python2.7 \
-	rubygems \
-	ruby-bcrypt \
-	smtp-user-enum \
-	software-properties-common \
-	sqlite3 \
-	sqlmap \
-	sslscan \
-	sslyze \
-	theharvester \
-	unicornscan \
-	uniscan \
-	w3af \
-	waffit \
-	wapiti \
-	whatweb \
-	whois \
+	hydra \
+	iceweasel \
 	wpscan \
-	xprobe2 \
-	zenmap \
-	zlib1g-dev \
-	&& apt-get clean
-
-
-COPY ./install.sh /root
-
-# Install python and ruby + dependencies
-RUN mv /usr/bin/python /usr/bin/python.unknown && \
+	sqlmap \
+	nbtscan \
+	enum4linux \
+	cisco-torch \
+	metasploit-framework \
+	theharvester \
+	dnsenum \
+	nikto \
+	smtp-user-enum \
+	whatweb \
+	dnsutils \
+	sslscan \
+	amap \
+	arachni \
+	&& apt-get clean && \
+	mv /usr/bin/python /usr/bin/python.unknown && \
 	ln -s /usr/bin/python2.7 /usr/bin/python && \
 	curl https://bootstrap.pypa.io/get-pip.py | python && \
 	gem install  \
@@ -89,16 +62,13 @@ RUN mv /usr/bin/python /usr/bin/python.unknown && \
 		dnspython \
 		ipaddress \
 		tldextract \
-		urllib3
-
-# INSTALL SN1P3R
-RUN cd /root && \
+		urllib3 && \
 	git clone https://github.com/1N3/Sn1per.git && \
-	cd ~/Sn1per && \
-	rm install.sh && \
-	mv ~/install.sh ./install.sh; sync && \
-	chmod +x install.sh && \
-	./install.sh
+	cd Sn1per && \
+	/bin/bash ./install.sh && \
+	echo Cleaning up package index && \
+	apt-get clean && \
+	echo Image creation complete
 
 # Always start container into a bash shell
 CMD /bin/bash
