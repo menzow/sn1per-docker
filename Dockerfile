@@ -46,7 +46,9 @@ RUN apt-get update && apt-get install -y \
 	sslscan \
 	amap \
 	arachni \
+        bsdmainutils \
 	&& apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
 	mv /usr/bin/python /usr/bin/python.unknown && \
 	ln -s /usr/bin/python2.7 /usr/bin/python && \
 	curl https://bootstrap.pypa.io/get-pip.py | python && \
@@ -70,5 +72,4 @@ RUN apt-get update && apt-get install -y \
 	apt-get clean && \
 	echo Image creation complete
 
-# Always start container into a bash shell
-CMD /bin/bash
+CMD /usr/bin/sniper
