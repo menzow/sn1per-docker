@@ -47,9 +47,7 @@ RUN apt-get update && apt-get install -y \
 	sslscan \
 	amap \
 	arachni \
-        bsdmainutils \
-	&& apt-get clean && \
-        rm -rf /var/lib/apt/lists/* && \
+    bsdmainutils \
 	mv /usr/bin/python /usr/bin/python.unknown && \
 	ln -s /usr/bin/python2.7 /usr/bin/python && \
 	curl https://bootstrap.pypa.io/get-pip.py | python && \
@@ -70,7 +68,9 @@ RUN apt-get update && apt-get install -y \
 	cd Sn1per && \
 	/bin/bash ./install.sh && \
 	echo Cleaning up package index && \
+	python -m pip uninstall pip setuptools && \
 	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* && \
 	echo Image creation complete
 
 CMD /usr/bin/sniper
