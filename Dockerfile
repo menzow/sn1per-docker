@@ -5,6 +5,7 @@ ENV LC_ALL C.UTF-8
 ENV INSTALL_DIR /usr/share/sniper
 ENV LOOT_DIR /usr/share/sniper/loot
 ENV PLUGINS_DIR /usr/share/sniper/plugins
+ENV SNIPER_SKIP_DEPENDENCIES true
 
 RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" >> /etc/apt/sources.list.d/kali.sources.list && \
 	gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6 && \
@@ -68,9 +69,10 @@ RUN apt-get update && apt-get install -y \
 	cd Sn1per && \
 	/bin/bash ./install.sh && \
 	echo Cleaning up package index && \
-	python -m pip uninstall pip setuptools && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/* && \
+		python -m pip uninstall pip setuptools && \
+		gem cleanup && \
+		apt-get clean && \
+		rm -rf /var/lib/apt/lists/* && \
 	echo Image creation complete
 
 CMD /usr/bin/sniper
