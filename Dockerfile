@@ -11,50 +11,51 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" >> /
 	gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6 && \
 	gpg -a --export ED444FF07D8D0BF6 | apt-key add -
 RUN apt-get update && apt-get install -y \
-	ruby \
-	rubygems \
-	python \
-	dos2unix \
-	zenmap \
-	sslyze \
-	uniscan \
-	xprobe2 \
-	cutycapt \
-	unicornscan \
-	waffit \
-	host \
-	whois \
-	dirb \
-	dnsrecon \
-	curl \
-	nmap \
-	php \
-	php-curl \
-	hydra \
-	iceweasel \
-	wpscan \
-	sqlmap \
-	nbtscan \
-	enum4linux \
-	cisco-torch \
-	metasploit-framework \
-	theharvester \
-	dnsenum \
-	sqlite3 \
-	nikto \
-	smtp-user-enum \
-	whatweb \
-	dnsutils \
-	sslscan \
-	amap \
-	arachni \
-    bsdmainutils \
+		ruby \
+		rubygems \
+		python \
+		dos2unix \
+		zenmap \
+		sslyze \
+		uniscan \
+		xprobe2 \
+		cutycapt \
+		unicornscan \
+		waffit \
+		host \
+		whois \
+		dirb \
+		dnsrecon \
+		curl \
+		nmap \
+		php \
+		php-curl \
+		hydra \
+		iceweasel \
+		wpscan \
+		sqlmap \
+		nbtscan \
+		enum4linux \
+		cisco-torch \
+		metasploit-framework \
+		theharvester \
+		dnsenum \
+		libsqlite3-dev \
+		nikto \
+		smtp-user-enum \
+		whatweb \
+		dnsutils \
+		sslscan \
+		amap \
+		arachni \
+    	bsdmainutils && \
 	mv /usr/bin/python /usr/bin/python.unknown && \
 	ln -s /usr/bin/python2.7 /usr/bin/python && \
 	curl https://bootstrap.pypa.io/get-pip.py | python && \
 	gem install  \
 		mechanize \
 		bcrypt \
+		sqlite3 \
 		net-http-persistent \
 		rake \
 		ruby-nmap \
