@@ -70,8 +70,6 @@ RUN apt-get update && apt-get install -y \
 	cd Sn1per && \
 	/bin/bash ./install.sh && \
 	echo Cleaning up package index && \
-		python -m pip uninstall pip setuptools && \
-		gem cleanup && \
 		apt-get clean && \
 		rm -rf /var/lib/apt/lists/* && \
 	echo Image creation complete
