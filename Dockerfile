@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y \
 	metasploit-framework \
 	theharvester \
 	dnsenum \
+	sqlite3 \
 	nikto \
 	smtp-user-enum \
 	whatweb \
@@ -55,7 +56,6 @@ RUN apt-get update && apt-get install -y \
 	gem install  \
 		mechanize \
 		bcrypt \
-		sqlite3 \
 		net-http-persistent \
 		rake \
 		ruby-nmap \
