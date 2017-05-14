@@ -27,7 +27,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		 >> /etc/apt/sources.list.d/kali.sources.list && \
 	gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6 && \
 	gpg -a --export ED444FF07D8D0BF6 | apt-key add - && \
-		apt-get update && apt-get install --no-install-recommends -y \
+		apt-get update && apt-get install -y \
 		ruby \
 		rubygems \
 		dos2unix \
@@ -58,6 +58,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		cisco-torch \
 		metasploit-framework \
 		theharvester \
+		ruby-dev \
 		dnsenum \
 		libsqlite3-dev \
 		nikto \
@@ -92,10 +93,9 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		apt-get clean && \
 		rm /etc/apt/apt.conf.d/30autoproxy && \
 		rm -rf /var/lib/apt/lists/* && \
-	echo Image creation complete
-### END BASE LAYER ###
+	echo "Image creation complete"
 
-RUN ["mkdikr", "/usr/share/sniper/loot/{screenshots,nmap,domains,reports,imports,notes,web}"]
+RUN ["mkdir", "/usr/share/sniper/loot/{screenshots,nmap,domains,reports,imports,notes,web}"]
 
 # Loot volume, used for output
 VOLUME /usr/share/sniper/loot
