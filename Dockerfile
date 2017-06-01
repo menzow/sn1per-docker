@@ -88,7 +88,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		urllib3 && \
 	git clone https://github.com/1N3/Sn1per.git && \
 	cd Sn1per && \
-	/bin/bash ./install.sh && \
+	echo "y" | /bin/bash ./install.sh && \
 	echo Cleaning up package index && \
 		apt-get clean && \
 		rm /etc/apt/apt.conf.d/30autoproxy && \
