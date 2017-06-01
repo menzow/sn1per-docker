@@ -11,6 +11,7 @@ ENV LOOT_DIR /usr/share/sniper/loot
 ENV PLUGINS_DIR /usr/share/sniper/plugins
 ENV SNIPER_SKIP_DEPENDENCIES true
 ENV DISPLAY :99
+ENV DEBIAN_FRONTEND noninteractive
 
 ### START BASE LAYER ###
 
