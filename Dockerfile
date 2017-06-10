@@ -89,7 +89,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		urllib3 && \
 	git clone https://github.com/1N3/Sn1per.git && \
 	cd Sn1per && \
-	echo "y" | /bin/bash ./install.sh && \
+	printf 'yes\nyes\nyes\n' | /bin/bash ./install.sh && \
 	echo Cleaning up package index && \
 		apt-get clean && \
 		rm /etc/apt/apt.conf.d/30autoproxy && \
@@ -106,5 +106,3 @@ VOLUME /usr/share/sniper/wordlists
 
 ADD ["docker-entrypoint.sh", "/root/"]
 ENTRYPOINT ["/root/docker-entrypoint.sh"]
-
-CMD /usr/bin/sniper
