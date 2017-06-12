@@ -92,7 +92,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 	printf 'yes\nyes\nyes\n' | /bin/bash ./install.sh && \
 	echo Cleaning up package index && \
 		apt-get clean && \
-		rm /etc/apt/apt.conf.d/30autoproxy && \
+		rm -rf /etc/apt/apt.conf.d/30autoproxy && \
 		rm -rf /var/lib/apt/lists/* && \
 	echo "Image creation complete"
 
