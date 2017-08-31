@@ -90,6 +90,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 	git clone https://github.com/1N3/Sn1per.git && \
 	cd Sn1per && \
 	printf 'yes\nyes\nyes\n' | /bin/bash ./install.sh && \
+	sniper update && \
 	echo Cleaning up package index && \
 		apt-get clean && \
 		rm -rf /etc/apt/apt.conf.d/30autoproxy && \
