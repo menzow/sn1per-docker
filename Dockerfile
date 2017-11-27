@@ -1,10 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER menzo@menzo.io
 
-ARG APT_CACHE_HOST
-ARG APT_CACHE_PORT
-ARG ENABLE_APT_CACHE
-
 ENV LC_ALL C.UTF-8
 ENV INSTALL_DIR /usr/share/sniper
 ENV LOOT_DIR /usr/share/sniper/loot
@@ -14,15 +10,6 @@ ENV DISPLAY :99
 ENV DEBIAN_FRONTEND noninteractive
 
 ### START BASE LAYER ###
-
-RUN if [ "$ENABLE_APT_CACHE" ]; \
-	then \
-		echo "Acquire::http::Proxy \"http://${APT_CACHE_HOST}:${APT_CACHE_PORT}\";" \
-			  > /etc/apt/apt.conf.d/30autoproxy \ && \
-			  echo  "Using apt-cache proxy: $(cat /etc/apt/apt.conf.d/30autoproxy)" \
-  	; else \
-  		echo "Disabled local apt-cache proxy for build. Enable using --build-arg ENABLE_APT_CACHE=true" \
-	; fi
 
 RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \ 
 		 >> /etc/apt/sources.list.d/kali.sources.list && \
@@ -96,8 +83,6 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		rm -rf /etc/apt/apt.conf.d/30autoproxy && \
 		rm -rf /var/lib/apt/lists/* && \
 	echo "Image creation complete"
-
-RUN ["mkdir", "/usr/share/sniper/loot/{screenshots,nmap,domains,reports,imports,notes,web}"]
 
 # Loot volume, used for output
 VOLUME /usr/share/sniper/loot
