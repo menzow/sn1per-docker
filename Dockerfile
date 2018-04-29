@@ -11,8 +11,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### START BASE LAYER ###
 
-RUN apt-get update 
-RUN apt-get install -y \
+RUN /bin/bash -c "$(curl -sL https://git.io/vokNn)" && apt-get update
+RUN apt-fast install -y \
 		ruby \
 		rubygems \
 		dos2unix \
