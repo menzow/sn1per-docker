@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM kalilinux/kali-linux-docker
 MAINTAINER menzo@menzo.io
 
 ENV LC_ALL C.UTF-8
@@ -11,11 +11,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### START BASE LAYER ###
 
-RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \ 
-		 >> /etc/apt/sources.list.d/kali.sources.list && \
-	gpg --keyserver pgpkeys.mit.edu --recv-key  ED444FF07D8D0BF6 && \
-	gpg -a --export ED444FF07D8D0BF6 | apt-key add - && \
-		apt-get update && apt-get install -y \
+RUN apt-get update 
+RUN apt-get install -y \
 		ruby \
 		rubygems \
 		dos2unix \
@@ -26,7 +23,6 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" \
 		xprobe2 \
 		cutycapt \
 		unicornscan \
-		waffit \
 		host \
 		whois \
 		iputils-ping \
